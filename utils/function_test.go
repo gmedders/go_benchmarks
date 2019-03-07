@@ -1,4 +1,4 @@
-package functest
+package utils
 
 import (
 	"sync"
