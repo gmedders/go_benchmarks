@@ -2,7 +2,7 @@ package utils
 
 import (
 	"encoding/json"
-	"fmt"
+	// "fmt"
 	"net/http"
 	// "sync"
 )
@@ -22,7 +22,6 @@ func StartServer(addr string, srvErr chan error) *http.Server {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("/count", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("In the server handler")
 
 		var result map[string]int
 		json.NewDecoder(r.Body).Decode(&result)
@@ -42,11 +41,14 @@ func StartServer(addr string, srvErr chan error) *http.Server {
 		w.WriteHeader(http.StatusOK)
 		w.Write(resultJSON)
 	})
+	mux.HandleFunc("/noop", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("200 - OK"))
+	})
 
 	srv := &http.Server{Addr: addr, Handler: mux}
 
 	go func(e chan error) {
-		// defer wg.Done()
 		// ListenAndServe() returns ErrServerClosed on graceful close
 		e <- srv.ListenAndServe()
 	}(srvErr)
