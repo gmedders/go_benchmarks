@@ -15,3 +15,14 @@ go test
 go test -race
 go test -bench=.
 ```
+
+### Future tests
+
+- HTTP handler
+  - default vs denco
+  - open/close each time vs open
+- go-swagger
+  - compare vs HTTP tests
+  - with mutex
+- RabbitMQ
+  - various use cases
