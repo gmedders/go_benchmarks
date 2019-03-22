@@ -133,6 +133,7 @@ func BenchmarkIncrementIntViaHTTP(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		resp, _ := http.Post("http://localhost:8080/count", "application/json", bytes.NewBuffer(bytesRepresentation))
 		json.NewDecoder(resp.Body).Decode(&message)
+		resp.Body.Close()
 		bytesRepresentation, _ = json.Marshal(message)
 	}
 
@@ -140,7 +141,7 @@ func BenchmarkIncrementIntViaHTTP(b *testing.B) {
 	<-srvErr
 }
 
-func BenchmarkIncrementIntViaPersistentHTTP(b *testing.B) {
+func BenchmarkIncrementIntViaHTTPClient(b *testing.B) {
 	srvErr := make(chan error)
 	srv := StartServer(":8080", srvErr)
 
@@ -172,6 +173,7 @@ func BenchmarkNoOpHTTP(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		resp, _ := client.Post("http://localhost:8080/noop", "application/json", bytes.NewBuffer(bytesRepresentation))
 		ioutil.ReadAll(resp.Body)
+		resp.Body.Close()
 	}
 
 	_ = srv.Shutdown(context.Background())
