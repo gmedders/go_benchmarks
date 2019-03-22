@@ -24,22 +24,18 @@ build complexity so that I could understand the relative overhead of different o
 The results of those benchmarks performed on my laptop are:
 
 ```
-[go_benchmarks]$ go test -bench=. ./...
-?   	benchmarks	[no test files]
+[go_benchmark]$ go test -bench=.
 goos: darwin
 goarch: amd64
-pkg: benchmarks/utils
-BenchmarkIncrementIntByValue-8                 	2000000000	         0.28 ns/op
-BenchmarkIncrementIntByRef-8                   	2000000000	         1.54 ns/op
-BenchmarkIncrementIntByRefGoroutineMutex-8     	 5000000	       310 ns/op
-BenchmarkIncrementIntByRefGoroutineAtomic-8    	 5000000	       309 ns/op
-BenchmarkIncrementIntByRefGoroutineChannel-8   	 2000000	       813 ns/op
-BenchmarkIncrementIntInJSON-8                  	 1000000	      1988 ns/op
-BenchmarkIncrementIntViaHTTP-8                 	   10000	    104156 ns/op
-BenchmarkIncrementIntViaHTTPClient-8           	   10000	    109917 ns/op
-BenchmarkNoOpHTTP-8                            	   20000	     92992 ns/op
-PASS
-ok  	benchmarks/utils	24.954s
+BenchmarkIncrementIntByValue-8                 	2000000000	         0.29 ns/op
+BenchmarkIncrementIntByRef-8                   	2000000000	         1.58 ns/op
+BenchmarkIncrementIntByRefGoroutineMutex-8     	 5000000	       289 ns/op
+BenchmarkIncrementIntByRefGoroutineAtomic-8    	 5000000	       308 ns/op
+BenchmarkIncrementIntByRefGoroutineChannel-8   	 2000000	       807 ns/op
+BenchmarkIncrementIntInJSON-8                  	 1000000	      1890 ns/op
+BenchmarkIncrementIntViaHTTP-8                 	   10000	    106486 ns/op
+BenchmarkIncrementIntViaHTTPClient-8           	   10000	    113770 ns/op
+BenchmarkNoOpHTTP-8                            	   20000	     95364 ns/op
 ```
 
 As I mentioned these were from some preliminary exploration of Go. If you spot
